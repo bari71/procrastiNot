@@ -1,6 +1,6 @@
 <div align="center">
 
-# 🏗️ ProjectFlow — Real-Time Project Management Platform
+# 🏗️ Procrasti-Not — Real-Time Project Management Platform
 
 A production-grade, full-stack project management application inspired by Jira — built from scratch with **Next.js 14**, **TypeScript**, **Hono RPC**, and **Appwrite**. Features workspace collaboration, Kanban boards with drag-and-drop, calendar scheduling, analytics dashboards, role-based access control, and invite-based team onboarding.
 
@@ -28,7 +28,7 @@ A production-grade, full-stack project management application inspired by Jira �
 
 ## Overview
 
-ProjectFlow is a **multi-tenant project management system** where teams can create workspaces, organize projects, and track tasks through customizable workflows. The application demonstrates full-stack engineering depth: end-to-end type safety from database to UI, a custom API layer with RPC-style client generation, server-side rendering with granular client hydration, and production-ready patterns including role-based authorization, optimistic updates, and bulk operations.
+Procrasti-Not is a **multi-tenant project management system** where teams can create workspaces, organize projects, and track tasks through customizable workflows. The application demonstrates full-stack engineering depth: end-to-end type safety from database to UI, a custom API layer with RPC-style client generation, server-side rendering with granular client hydration, and production-ready patterns including role-based authorization, optimistic updates, and bulk operations.
 
 **This is not a tutorial clone.** The codebase implements real-world patterns used in production SaaS applications — feature-based architecture, session middleware, positional ordering algorithms for drag-and-drop persistence, and server-side data aggregation for analytics.
 
@@ -186,8 +186,8 @@ ProjectFlow is a **multi-tenant project management system** where teams can crea
 ### Installation
 
 ```bash
-git clone https://github.com/your-username/projectflow.git
-cd projectflow
+git clone https://github.com/your-username/procrasti-not.git
+cd procrasti-not
 npm install
 ```
 
