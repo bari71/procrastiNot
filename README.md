@@ -187,7 +187,7 @@ Procrasti-Not is a **multi-tenant project management system** where teams can cr
 
 ```bash
 git clone https://github.com/bari71/procrastiNot.git
-cd procrasti-not
+cd procrastiNot
 npm install
 ```
 
