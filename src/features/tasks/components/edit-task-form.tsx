@@ -74,7 +74,7 @@ export const EditTaskForm = ({ onCancel, projectOptions, memberOptions, initialV
                                             Task Name
                                         </FormLabel>
                                         <FormControl>
-                                            <Input placeholder="Enter workspace name" {...field} />
+                                            <Input placeholder="Enter task name" {...field} />
                                         </FormControl>
                                         <FormMessage />
                                     </FormItem>

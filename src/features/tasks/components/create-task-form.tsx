@@ -69,7 +69,7 @@ export const CreateTaskForm = ({ onCancel, projectOptions, memberOptions }: Crea
                                             Task Name
                                         </FormLabel>
                                         <FormControl>
-                                            <Input placeholder="Enter workspace name" {...field} />
+                                            <Input placeholder="Enter task name" {...field} />
                                         </FormControl>
                                         <FormMessage />
                                     </FormItem>
