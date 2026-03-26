@@ -4,7 +4,7 @@
 
 A production-grade, full-stack project management application inspired by Jira — built from scratch with **Next.js 14**, **TypeScript**, **Hono RPC**, and **Appwrite**. Features workspace collaboration, Kanban boards with drag-and-drop, calendar scheduling, analytics dashboards, role-based access control, and invite-based team onboarding.
 
-[![Live Demo](https://img.shields.io/badge/▶_Live_Demo-000000?style=for-the-badge&logo=vercel&logoColor=white)](https://your-app.vercel.app)
+[![Live Demo](https://procrasti-not-pi.vercel.app/sign-up)
 [![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white)]()
 [![Next.js](https://img.shields.io/badge/Next.js_14-000000?style=for-the-badge&logo=nextdotjs&logoColor=white)]()
 [![Tailwind](https://img.shields.io/badge/Tailwind_CSS-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white)]()
@@ -329,6 +329,6 @@ The API is a **Hono application** mounted at `/api` with five domain routers:
 
 <div align="center">
 
-**Built with precision by [Your Name](https://your-portfolio.com)**
+**Built with precision by [Annur Bari](https://github.com/bari71)**
 
 </div>
