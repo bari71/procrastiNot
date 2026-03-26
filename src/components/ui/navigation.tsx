@@ -1,7 +1,6 @@
 'use client';
 
 import { cn } from "@/lib/utils"
-import { Item } from "@radix-ui/react-dropdown-menu"
 import { SettingsIcon, UsersIcon } from "lucide-react"
 import Link from "next/link"
 import { GoCheckCircle, GoCheckCircleFill, GoHome } from "react-icons/go"

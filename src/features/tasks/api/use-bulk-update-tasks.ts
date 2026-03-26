@@ -1,7 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { InferRequestType, InferResponseType } from 'hono';
 import { toast } from 'sonner';
-import { useRouter } from 'next/navigation';
 
 import { client } from '@/lib/rpc';
 
@@ -10,7 +9,6 @@ type ResponseType = InferResponseType<typeof client.api.tasks['bulk-update']['$p
 
 export const useBulkUpdateTasks = () => {
     const queryClient = useQueryClient();
-    const router = useRouter();
     
     const mutation = useMutation<ResponseType, Error, RequestType>({
         mutationFn: async ({ json }) => {
@@ -27,7 +25,7 @@ export const useBulkUpdateTasks = () => {
 
             queryClient.invalidateQueries({ queryKey: ['tasks'] });
         },
-        onError: (error) => {
+        onError: () => {
             toast.error('Failed to update tasks');
         }
     })

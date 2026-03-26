@@ -21,3 +21,5 @@ export const PATCH = handle(app)
 export const DELETE = handle(app)
 
 export type AppType = typeof routes;
+// `routes` is only referenced for the exported type; mark as used to satisfy ESLint.
+void routes;

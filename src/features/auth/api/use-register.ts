@@ -28,7 +28,7 @@ export const useRegister = () => {
             toast.success('Registered successfully');
             queryClient.invalidateQueries({ queryKey: ['current'] });
         },
-        onError: (error) => {
+        onError: () => {
             toast.error('Failed to register');
         }
     })

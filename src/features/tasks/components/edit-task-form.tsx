@@ -9,42 +9,41 @@ import { Separator } from "@/components/ui/separator";
 import { FormControl, Form, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import Image from "next/image";
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-import { ImageIcon } from "lucide-react";
-import { useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
-import { useWorkspaceId } from "@/features/workspaces/hooks/use-workspace-id";
-import { Task, TaskStatus } from "../types";
+import { TaskStatus } from "../types";
 import { DatePicker } from "@/components/ui/date-picker";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { MemberAvatar } from "@/features/members/components/member-avatar";
 import { ProjectAvatar } from "@/features/projects/components/project-avatar";
 import { useUpdateTask } from "../api/use-update-task";
 
+const editTaskSchema = createTaskSchema.omit({ workspaceId: true, description: true });
+
 interface EditTaskFormProps {
     onCancel?: () => void;
     projectOptions: { id: string, name: string, imageUrl: string }[];
     memberOptions: { id: string, name: string }[];
-    initialValues: any;
+    initialValues: unknown;
 }
 
 export const EditTaskForm = ({ onCancel, projectOptions, memberOptions, initialValues }: EditTaskFormProps) => {
-    const workspaceId = useWorkspaceId();
+    const typedInitialValues = initialValues as {
+        $id: string;
+        dueDate?: string | Date | null;
+    } & Partial<z.infer<typeof createTaskSchema>>;
 
-    const router = useRouter();
-    const form = useForm<z.infer<typeof createTaskSchema>>({
-        resolver: zodResolver(createTaskSchema.omit({ workspaceId: true, description: true })),
+    const form = useForm<z.input<typeof editTaskSchema>>({
+        resolver: zodResolver(editTaskSchema),
         defaultValues: {
-            ...initialValues,
-            dueDate: initialValues.dueDate ? new Date(initialValues.dueDate) : undefined,
+            ...typedInitialValues,
+            dueDate: typedInitialValues.dueDate ? new Date(typedInitialValues.dueDate) : undefined,
         },
     });
 
     const { mutate, isPending } = useUpdateTask();
 
-    const onSubmit = (data: z.infer<typeof createTaskSchema>) => {
-        mutate({ json: data, param: { taskId: initialValues.$id }}, {
+    const onSubmit = (data: z.input<typeof editTaskSchema>) => {
+        mutate({ json: data, param: { taskId: typedInitialValues.$id }}, {
             onSuccess: () => {
                 form.reset();
                 onCancel?.();
@@ -91,7 +90,16 @@ export const EditTaskForm = ({ onCancel, projectOptions, memberOptions, initialV
                                             Due Date
                                         </FormLabel>
                                         <FormControl>
-                                            <DatePicker {...field}/>
+                                            <DatePicker
+                                                value={
+                                                    field.value instanceof Date
+                                                        ? field.value
+                                                        : field.value
+                                                            ? new Date(field.value as string | number | Date)
+                                                            : undefined
+                                                }
+                                                onChange={(date) => field.onChange(date)}
+                                            />
                                         </FormControl>
                                         <FormMessage />
                                     </FormItem>

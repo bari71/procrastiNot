@@ -10,10 +10,6 @@ import { Separator } from "@/components/ui/separator";
 import { FormControl, Form, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import Image from "next/image";
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-import { ImageIcon } from "lucide-react";
-import { useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { useWorkspaceId } from "@/features/workspaces/hooks/use-workspace-id";
 import { TaskStatus } from "../types";
@@ -30,9 +26,9 @@ interface CreateTaskFormProps {
 
 export const CreateTaskForm = ({ onCancel, projectOptions, memberOptions }: CreateTaskFormProps) => {
     const workspaceId = useWorkspaceId();
-
-    const router = useRouter();
-    const form = useForm<z.infer<typeof createTaskSchema>>({
+    // `z.coerce.date()` means the schema *input* for `dueDate` is not `Date` yet.
+    // Using `z.input` keeps `useForm` + `zodResolver` types aligned.
+    const form = useForm<z.input<typeof createTaskSchema>>({
         resolver: zodResolver(createTaskSchema),
         defaultValues: {
             workspaceId: workspaceId
@@ -41,7 +37,7 @@ export const CreateTaskForm = ({ onCancel, projectOptions, memberOptions }: Crea
 
     const { mutate, isPending } = useCreateTask();
 
-    const onSubmit = (data: z.infer<typeof createTaskSchema>) => {
+    const onSubmit = (data: z.input<typeof createTaskSchema>) => {
         mutate({ json: { ...data, workspaceId }}, {
             onSuccess: () => {
                 form.reset();
@@ -89,7 +85,16 @@ export const CreateTaskForm = ({ onCancel, projectOptions, memberOptions }: Crea
                                             Due Date
                                         </FormLabel>
                                         <FormControl>
-                                            <DatePicker {...field}/>
+                                            <DatePicker
+                                                value={
+                                                    field.value instanceof Date
+                                                        ? field.value
+                                                        : field.value
+                                                            ? new Date(field.value as string | number | Date)
+                                                            : undefined
+                                                }
+                                                onChange={(date) => field.onChange(date)}
+                                            />
                                         </FormControl>
                                         <FormMessage />
                                     </FormItem>

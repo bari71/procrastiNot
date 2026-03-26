@@ -3,13 +3,11 @@ import { InferRequestType, InferResponseType } from 'hono';
 import { toast } from 'sonner';
 
 import { client } from '@/lib/rpc';
-import { useRouter } from 'next/navigation';
 
 type RequestType = InferRequestType<typeof client.api.workspaces[':workspaceId']['$patch']>;
 type ResponseType = InferResponseType<typeof client.api.workspaces[':workspaceId']['$patch'], 200>;
 
 export const useUpdateWorkspace = () => {
-    const router = useRouter();
     const queryClient = useQueryClient();
     
     const mutation = useMutation<ResponseType, Error, RequestType>({
@@ -28,7 +26,7 @@ export const useUpdateWorkspace = () => {
             queryClient.invalidateQueries({ queryKey: ['workspaces'] });
             queryClient.invalidateQueries({ queryKey: ['workspace', data.$id] });
         },
-        onError: (error) => {
+        onError: () => {
             toast.error('Failed to create workspace');
         }
     })

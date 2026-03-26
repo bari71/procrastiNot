@@ -3,13 +3,11 @@ import { InferRequestType, InferResponseType } from 'hono';
 import { toast } from 'sonner';
 
 import { client } from '@/lib/rpc';
-import { useRouter } from 'next/navigation';
 
 type RequestType = InferRequestType<typeof client.api.projects[":projectId"]['$delete']>;
 type ResponseType = InferResponseType<typeof client.api.projects[":projectId"]['$delete'], 200>;
 
 export const useDeleteProject = () => {
-    const router = useRouter();
     const queryClient = useQueryClient();
     
     const mutation = useMutation<ResponseType, Error, RequestType>({
@@ -28,7 +26,7 @@ export const useDeleteProject = () => {
             queryClient.invalidateQueries({ queryKey: ['projects'] });
             queryClient.invalidateQueries({ queryKey: ['project', data.$id] });
         },
-        onError: (error) => {
+        onError: () => {
             toast.error('Failed to delete project');
         }
     })

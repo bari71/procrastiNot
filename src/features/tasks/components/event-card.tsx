@@ -8,7 +8,7 @@ import { useWorkspaceId } from "@/features/workspaces/hooks/use-workspace-id";
 
 interface EventCardProps {
     title: string;
-    assignee: any;
+    assignee?: { name?: string } | null;
     project: Project;
     status: TaskStatus;
     id: string;
@@ -42,7 +42,7 @@ export const EventCard = ({ title, assignee, project, status, id }: EventCardPro
                 <p>{title}</p>
                 <div className="flex items-center gap-x-1">
                     <MemberAvatar
-                        name={assignee?.name}
+                        name={assignee?.name ?? ''}
                     />
                     <div className="size-1 rounded-full bg-neutral-300"/>
                     <ProjectAvatar

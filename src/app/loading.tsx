@@ -1,8 +1,6 @@
 'use client';
 
-import { Button } from "@/components/ui/button";
 import { Loader } from "lucide-react";
-import Link from "next/link";
 
 const LoadingPage = () => {
     return (

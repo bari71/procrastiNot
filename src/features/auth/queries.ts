@@ -1,9 +1,6 @@
 'use server';
 
-import { AUTH_COOKIE } from '@/features/auth/constants';
 import { createSessionClient } from '@/lib/appwrite';
-import { cookies } from 'next/headers';
-import { Account, Client } from 'node-appwrite';
 
 export const getCurrent = async () => {
     try {

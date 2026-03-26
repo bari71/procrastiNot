@@ -9,8 +9,6 @@ import z from "zod";
 import { Task, TaskStatus } from "../types";
 import { createAdminClient } from "@/lib/appwrite";
 import { Project } from "@/features/projects/types";
-import { findPositionOfBar } from "recharts/types/util/ChartUtils";
-import WorkspaceSettingsPage from "@/app/(standalone)/workspaces/[workspaceId]/settings/page";
 
 const app = new Hono()
     .get(

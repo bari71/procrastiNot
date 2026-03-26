@@ -1,6 +1,6 @@
 'use client';
 
-import { ArrowUpDown, Link, MoreHorizontal, MoreVertical } from "lucide-react";
+import { ArrowUpDown, MoreVertical } from "lucide-react";
 import { ColumnDef } from "@tanstack/react-table";
 import { Task } from "../types";
 import { Button } from "@/components/ui/button";
